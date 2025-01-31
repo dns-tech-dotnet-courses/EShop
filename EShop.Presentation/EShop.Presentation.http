@@ -1,6 +1,6 @@
 @EShop.Presentation_HostAddress = http://localhost:5038
 
-GET {{EShop.Presentation_HostAddress}}/weatherforecast/
+GET {{EShop.Presentation_HostAddress}}/api/Products/
 Accept: application/json
 
 ###
