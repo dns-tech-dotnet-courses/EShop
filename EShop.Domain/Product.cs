@@ -1,4 +1,4 @@
-﻿namespace EShop.Presentation
+﻿namespace EShop.Domain
 {
     public class Product
     {
