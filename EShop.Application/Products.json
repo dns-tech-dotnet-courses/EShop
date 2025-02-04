@@ -1,0 +1,27 @@
+﻿[
+    {
+        "Id": 1,
+        "Name": "Iphone",
+        "Price": 333
+    },
+    {
+        "Id": 2,
+        "Name": "Iphone1",
+        "Price": 444
+    },
+    {
+        "Id": 3,
+        "Name": "Iphone2",
+        "Price": 555
+    },
+    {
+        "Id": 4,
+        "Name": "Iphone3",
+        "Price": 666
+    },
+    {
+        "Id": 5,
+        "Name": "Iphone4",
+        "Price": 777
+    }
+]
