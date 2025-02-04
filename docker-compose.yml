@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+
+  pg_eshop:
+    image: postgres:17.0
+    environment:
+      POSTGRES_DB: "eshop"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/data/postgres
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com" # Логин для входа в pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: "admin"       # Пароль для входа в pgAdmin
+    ports:
+      - "5050:80"                             # pgAdmin будет доступен на http://localhost:5050
+    depends_on:
+      - pg_eshop                              # Указываем, что pgAdmin зависит от pg_eshop
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin         # Создаем том для сохранения данных pgAdmin
+
+volumes:
+  pgdata:
+  pgadmin-data:

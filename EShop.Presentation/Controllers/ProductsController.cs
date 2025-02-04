@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EShop.Application;
-using EShop.DAL;
 
 namespace EShop.Presentation.Controllers
 {
@@ -8,12 +7,17 @@ namespace EShop.Presentation.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private ProductHandler _handler;
+
+        public ProductsController(ProductHandler productHandler)
+        {
+            _handler = productHandler;
+        }
+
         [HttpGet("getAll")]
         public IEnumerable<ProductDto> Get([FromQuery] decimal? priceFilter, [FromQuery] string? priceSortOrder)
         {
-            var productRepository = new JsonProductRepository();
-            var productHandler = new ProductHandler(productRepository);
-            var products = productHandler.Get();
+            var products = _handler.Get();
 
             if (priceFilter is not null)
                 products = products.Where(p => p.Price <= priceFilter);
@@ -35,9 +39,7 @@ namespace EShop.Presentation.Controllers
         [HttpGet("getById")]
         public IEnumerable<ProductDto> GetById([FromQuery] int? id)
         {
-            var productRepository = new JsonProductRepository();
-            var handler = new ProductHandler(productRepository);
-            var products = handler.GetById(id);
+            var products = _handler.GetById(id);
 
             var listOfDto = new List<ProductDto>();
             foreach (var product in products)

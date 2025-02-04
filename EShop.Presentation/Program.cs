@@ -1,3 +1,7 @@
+using EShop.Application;
+using EShop.DAL;
+using EShop.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +10,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IProductRepository, JsonProductRepository>();
+builder.Services.AddScoped<ProductHandler>();
 
 var app = builder.Build();
 
