@@ -2,6 +2,6 @@
 {
     public interface IProductRepository
     {
-        public IEnumerable<Product> Get();
+        public Task<IEnumerable<Product>> Get();
     }
 }

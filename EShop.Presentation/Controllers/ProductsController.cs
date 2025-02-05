@@ -15,9 +15,9 @@ namespace EShop.Presentation.Controllers
         }
 
         [HttpGet("getAll")]
-        public IEnumerable<ProductDto> Get([FromQuery] decimal? priceFilter, [FromQuery] string? priceSortOrder)
+        public async Task<IEnumerable<ProductDto>> Get([FromQuery] decimal? priceFilter, [FromQuery] string? priceSortOrder)
         {
-            var products = _handler.Get();
+            var products = await _handler.Get();
 
             if (priceFilter is not null)
                 products = products.Where(p => p.Price <= priceFilter);
@@ -37,9 +37,9 @@ namespace EShop.Presentation.Controllers
         }
 
         [HttpGet("getById")]
-        public IEnumerable<ProductDto> GetById([FromQuery] int? id)
+        public async Task<IEnumerable<ProductDto>> GetById([FromQuery] int? id)
         {
-            var products = _handler.GetById(id);
+            var products = await _handler.GetById(id);
 
             var listOfDto = new List<ProductDto>();
             foreach (var product in products)

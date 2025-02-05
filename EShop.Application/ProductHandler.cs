@@ -11,16 +11,16 @@ namespace EShop.Application
             _productRepository = productRepository;
         }
 
-        public IEnumerable<Product> Get()
+        public async Task<IEnumerable<Product>> Get()
         {
-            var products = _productRepository.Get();
+            var products = await _productRepository.Get();
             return products;
         }
 
-        public IEnumerable<Product> GetById(int? id)
+        public async Task<IEnumerable<Product>> GetById(int? id)
         {
             var listOfProducts = new List<Product>();
-            var products = _productRepository.Get();
+            var products = await _productRepository.Get();
             foreach (var product in products) {
                 if (product.Id == id)
                 {
