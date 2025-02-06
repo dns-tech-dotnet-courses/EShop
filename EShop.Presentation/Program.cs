@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using EShop.Application;
 using EShop.DAL;
 using EShop.Domain;
@@ -11,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IProductRepository, JsonProductRepository>();
+
+builder.Services.AddScoped<IProductRepository, DbProductRepository>();
 builder.Services.AddScoped<ProductHandler>();
 
 var app = builder.Build();
