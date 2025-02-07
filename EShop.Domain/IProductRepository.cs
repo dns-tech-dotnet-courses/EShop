@@ -1,7 +1,9 @@
-﻿namespace EShop.Domain
+﻿using FluentResults;
+
+namespace EShop.Domain
 {
     public interface IProductRepository
     {
-        public IEnumerable<Product> Get();
+        public Task<Result<IEnumerable<Product>>> Get();
     }
 }
