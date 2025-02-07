@@ -7,17 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Products.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EShop.Domain\EShop.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Products.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <PackageReference Include="FluentResults" Version="3.16.0" />
   </ItemGroup>
 
 </Project>

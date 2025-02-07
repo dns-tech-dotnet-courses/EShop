@@ -15,9 +15,14 @@ namespace EShop.Presentation.Controllers
         }
 
         [HttpGet("getAll")]
-        public IEnumerable<ProductDto> Get([FromQuery] decimal? priceFilter, [FromQuery] string? priceSortOrder)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> Get([FromQuery] decimal? priceFilter, [FromQuery] string? priceSortOrder)
         {
-            var products = _handler.Get();
+            var productsResult = await _handler.Get();
+            if (productsResult.IsFailed) {
+                return StatusCode(503, "Произошла ошибка при попытке получить товары");
+            }
+
+            var products = productsResult.Value;
 
             if (priceFilter is not null)
                 products = products.Where(p => p.Price <= priceFilter);
@@ -37,9 +42,15 @@ namespace EShop.Presentation.Controllers
         }
 
         [HttpGet("getById")]
-        public IEnumerable<ProductDto> GetById([FromQuery] int? id)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetById([FromQuery] int? id)
         {
-            var products = _handler.GetById(id);
+            var productsResult = await _handler.GetById(id);
+            if (productsResult.IsFailed)
+            {
+                return StatusCode(503, "Произошла ошибка при попытке получить товары");
+            }
+
+            var products = productsResult.Value;
 
             var listOfDto = new List<ProductDto>();
             foreach (var product in products)
